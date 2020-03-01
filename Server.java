@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 
-public class Server implements Observable {
+public class Server extends Observer implements Observable {
 
     private boolean changed;
     private ArrayList<Observer> observers;
-    private DataPoller dataPoller;
 
     public Server() {
         this.observers = new ArrayList<Observer>();
-        this.dataPoller = new DataPoller();
     }
 
     /**
@@ -52,6 +50,14 @@ public class Server implements Observable {
      */
     public void clearChanged() {
         this.changed = false;
+    }
+
+    /**
+     * Update after changes in the observable (the data poller)
+     * @param observable the observable that changed
+     */
+    public void update(Observable observable) {
+
     }
 
 }
