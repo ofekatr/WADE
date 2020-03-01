@@ -4,9 +4,11 @@ public class Server implements Observable {
 
     private boolean changed;
     private ArrayList<Observer> observers;
+    private DataPoller dataPoller;
 
     public Server() {
-        observers = new ArrayList<Observer>();
+        this.observers = new ArrayList<Observer>();
+        this.dataPoller = new DataPoller();
     }
 
     /**
