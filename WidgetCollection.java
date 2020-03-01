@@ -1,76 +1,79 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+
 
 public class WidgetCollection<Widget> implements Collection<Widget> {
-    private ArrayList<Widget> widgets;
+
+    static final int MAX_CAPACITY = 4;
+    private List<Widget> widgetList;
 
     public WidgetCollection() {
-        this.widgets = new ArrayList<>();
+        this.widgetList = new ArrayList<Widget>(MAX_CAPACITY);
     }
 
-    @Override
-    public int size() {
-        return this.widgets.size();
+    public boolean add(Widget o) {
+        if (this.size() < MAX_CAPACITY)
+            return this.widgetList.add(o);
+        return false;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return this.widgets.isEmpty();
+    public boolean addAll(Collection c) {
+        if (this.size() + c.size() <= MAX_CAPACITY)
+            return this.widgetList.addAll(c);
+        return false;
     }
 
-    @Override
-    public boolean contains(Object o) {
-        return this.widgets.contains(o);
-    }
-
-    @Override
-    public Iterator<Widget> iterator() {
-        return this.widgets.iterator();
-    }
-
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return this.widgets.toArray(a);
-    }
-
-    @Override
-    public boolean add(Widget widget) {
-        return this.widgets.add(widget);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return this.widgets.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return this.widgets.containsAll(c);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends Widget> c) {
-        return this.widgets.addAll(c);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return this.widgets.removeAll(c);
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return this.widgets.retainAll(c);
-    }
-
-    @Override
     public void clear() {
-        this.widgets.clear();
+        this.widgetList.clear();
+    }
+
+    public boolean contains(Object o) {
+        return this.widgetList.contains(o);
+    }
+
+    public boolean containsAll(Collection o) {
+        return this.widgetList.containsAll(o);
+    }
+
+    public boolean equals(Object c) {
+        return this.widgetList.equals(c);
+    }
+
+    public int hashcode() {
+        return 0;
+    }
+
+    public boolean isEmpty() {
+        return this.widgetList.isEmpty();
+    }
+
+    public Iterator<Widget> iterator() {
+        return this.widgetList.iterator();
+    }
+
+    public boolean remove(Object o) {
+        return this.widgetList.remove(o);
+    }
+
+    public boolean removeAll(Collection o) {
+        return this.widgetList.removeAll(o);
+    }
+
+    public boolean retainAll(Collection o) {
+        return this.widgetList.retainAll(o);
+    }
+
+    public int size() {
+        return this.widgetList.size();
+    }
+
+    public Object[] toArray() {
+        return this.widgetList.toArray();
+    }
+
+    public Object[] toArray(Object[] a) {
+        return this.widgetList.toArray(a);
     }
 }
