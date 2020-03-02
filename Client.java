@@ -1,33 +1,30 @@
 
-public class Client extends Observer {
+public class Client {
 
-    private WidgetCollection<Widget> widgets;
+    private WidgetCollection widgets;
     private ConnectionManager connectionManager;
+    // TODO: Add a member for display management.
+
 
     public Client() {
-        this.widgets = new WidgetCollection<>();
+        this.widgets = new WidgetCollection();
         this.connectionManager = ConnectionManager.instance();
     }
 
-    /**
-     * Add new widget to client's widget collection
-     *
-     * @param widget the new widget to be added
-     */
-    public void addWidget(Widget widget) {
-        if (widget != null) {
-            this.widgets.add(widget);
+    private void addWidget(String type) {
+        Widget w = WidgetFactory.createWidget(type);
+        if (w == null)
+            return;
+        this.widgets.add(w);
+    }
+
+    public void run() {
+        for (Widget widget : this.widgets) {
+            new Thread(() -> {
+                while (true) {
+                    widget.display();
+                }
+            }).start();
         }
     }
-
-    /**
-     * Update after changes in the observable (the server)
-     *
-     * @param observable the observable that changed
-     */
-    public void update(Observable observable) {
-
-    }
-
-
 }

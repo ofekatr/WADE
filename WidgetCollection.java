@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class WidgetCollection<Widget> implements Collection<Widget> {
+public class WidgetCollection implements Collection<Widget> {
 
     static final int MAX_CAPACITY = 4;
     private List<Widget> widgetList;

@@ -2,7 +2,12 @@ import java.util.ArrayList;
 
 //import okhttp3.*;
 
-public class DataPoller {
+public abstract class DataPoller {
+
+
+    public abstract DataPoller instance();
+
+    public abstract String sendRequest(String request);
 
 
 //    private boolean changed;
