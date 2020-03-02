@@ -57,7 +57,7 @@ public class WeatherWidget extends Widget {
     /**
      * Show weather as parsed from data
      */
-    void showWeather(String url) {
+    void showWeather(String url, String city) {
         String data = requestWeatherData(url);
         JSONObject obj = new JSONObject(data);
         JSONArray weather = obj.getJSONArray("weather");
@@ -66,10 +66,10 @@ public class WeatherWidget extends Widget {
         HashMap<String, String> description = getWeatherDescription(weather);
         HashMap<String, Integer> info = getWeatherInfo(main);
 
-        System.out.println("The weather today: " + description.get("main") + " - " +
+        System.out.println("The weather today in " + city + ": " + description.get("main") + " - " +
                 description.get("description") + "\n");
-        System.out.println("Temperature is " + info.get("temp") + "°C, with min temperature of " + info.get("temp_min") +
-                "°C and max temperature of " + info.get("temp_max") + "°C.\nHumidity: " + info.get("humidity") + "%\n");
+        System.out.println("Temperature is " + info.get("temp") + "°C, with min temperature of " + info.get("temp_min")
+                + "°C and max temperature of " + info.get("temp_max") + "°C.\nHumidity: " + info.get("humidity") + "%\n");
     }
 
     String requestWeatherData(String url) {
