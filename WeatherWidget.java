@@ -6,14 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class WeatherWidget extends Widget {
-    @Override
-    Widget instance() {
-        return null;
-    }
-
-    @Override
-    void display() {
-    }
 
     /**
      * Parse and get the description of the weather from the json
@@ -90,5 +82,15 @@ public class WeatherWidget extends Widget {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public void handleReply(String reply) {
+
     }
 }
