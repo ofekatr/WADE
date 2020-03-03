@@ -4,12 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 public class DataPollerFactory {
-    private static final Map<String, String> map;
-
-    static {
-        Map<String, String> hMap = new HashMap<>();
-        map = Collections.unmodifiableMap(hMap);
-    }
+    private static final Map<String, String> map = new HashMap<>();
 
     public static DataPoller createDataPoller(String name) {
         try {

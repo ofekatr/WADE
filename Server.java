@@ -83,10 +83,10 @@ public class Server {
                 Socket clientSocket = this.serverSocket.accept();
                 InputStream input = clientSocket.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
+//                PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
                 new Thread(
                         new ClientHandler(
-                                reader, out, clientSocket, dp)
+                                reader, clientSocket, dp)
                 ).start();
 
             } catch (IOException e) {

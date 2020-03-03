@@ -1,13 +1,30 @@
 public class Wade {
-    public static void main(String[] args) {
-        WeatherWidget weatherWidget = new WeatherWidget();
-        BusWidget busWidget = new BusWidget();
-        String urlBus = "https://bus.gov.il/WebApi/api/passengerinfo/GetRealtimeBusLineListByBustop/26290/he/false";
-        String city = "Ramat Gan";
-        String urlWeather = "http://api.openweathermap.org/data/2.5/weather?q="
-                + city +
-                "&appid=ba602af69e087755dc712a9ec9f29e71&units=metric";
-        weatherWidget.showWeather(urlWeather, city);
-        busWidget.showBusData(urlBus);
+    public static void DoServer() {
+        System.out.println("Starting Server!");
+
+        DataPollerFactory.addDataPoller("WebDataPoller", "WebDataPoller");
+        Server s = Server.instance();
+        s.addDataPoller("WebDataPoller");
+        s.runServer();
     }
+
+    public static void DoClient() {
+        System.out.println("Starting Client!");
+
+        WidgetFactory.addWidget("BusWidget", "Bus");
+        WidgetFactory.addWidget("WeatherWidget", "Weather");
+        Client c = new Client();
+        c.addWidget("Bus");
+        c.addWidget("Weather");
+        c.run();
+    }
+
+    public static void main(String[] args) {
+        if (args[0].contentEquals("--server")) {
+            DoServer();
+        } else if (args[0].contentEquals("--client")) {
+            DoClient();
+        }
+    }
+
 }

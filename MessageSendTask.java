@@ -29,11 +29,9 @@ public class MessageSendTask implements Runnable {
             Socket clientSocket = new Socket(host, port);
             InputStream input = clientSocket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
-            out.println(this.message.toString());
+            clientSocket.getOutputStream().write(this.message.toString().getBytes());
             String reply = reader.readLine();
             reader.close();
-            out.close();
             clientSocket.close();
             widget.handleReply(reply);
 

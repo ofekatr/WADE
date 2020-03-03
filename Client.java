@@ -25,7 +25,7 @@ public class Client {
      *
      * @param name the name of the widget to be added.
      */
-    private void addWidget(String name) {
+    public void addWidget(String name) {
         Widget w = WidgetFactory.createWidget(name);
         if (w == null)
             return;
@@ -55,6 +55,7 @@ public class Client {
         Iterator it = this.widgets.iterator();
         while (it.hasNext()) {
             Widget widget = (Widget) it.next();
+            widget.connectionManager = this.connectionManager;
             this.runWidget(widget);
         }
     }

@@ -1,68 +1,40 @@
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.net.ssl.*;
-import java.io.IOException;
-import java.security.cert.CertificateException;
-
 public class BusWidget extends Widget {
+    private long LastUpdate = 0;
+
+    String getUrl() {
+        return "https://bus.gov.il/WebApi/api/passengerinfo/GetRealtimeBusLineListByBustop/26290/he/false";
+    }
+
     @Override
     public void display() {
-
-    }
-
-    @Override
-    public void handleReply(String reply) {
-
-    }
-
-    private static OkHttpClient getUnsafeOkHttpClient() {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            final TrustManager[] trustAllCerts = new TrustManager[] {
-                    new X509TrustManager() {
-                        @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
-
-                        @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-                        }
-
-                        @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return new java.security.cert.X509Certificate[]{};
-                        }
-                    }
-            };
-
-            // Install the all-trusting trust manager
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
-
-            OkHttpClient okHttpClient = builder.build();
-            return okHttpClient;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        long displayThresholdInSeconds = 10;
+        long currentTime = System.currentTimeMillis() / 1000;
+        if ((currentTime - this.LastUpdate) > displayThresholdInSeconds) {
+            this.LastUpdate = currentTime;
+            System.out.println("Displaying Bus!");
+            this.sendRequest(this.getUrl());
         }
     }
 
-    void showBusData(String url) {
-        String data = requestBusData(url);
+    @Override
+    public String getType() {
+        return "WebDataPoller";
+    }
+
+    @Override
+    protected void handleReply(String reply) {
+        this.showBusData(reply);
+    }
+
+    @Override
+    protected void sendRequest(String url) {
+        super.sendRequest(url);
+    }
+
+    void showBusData(String data) {
         JSONArray busLines = new JSONArray(data);
 
         for (int i = 0; i < busLines.length(); i++) {
@@ -78,23 +50,4 @@ public class BusWidget extends Widget {
         }
     }
 
-    String requestBusData(String url) {
-        OkHttpClient client = getUnsafeOkHttpClient();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.body() == null) {
-                System.out.println("No body in response");
-                return null;
-            }
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

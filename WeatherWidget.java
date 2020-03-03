@@ -1,12 +1,10 @@
-import okhttp3.*;
-
-import java.io.IOException;
 import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class WeatherWidget extends Widget {
-
+    private long LastUpdate = 0;
+    String city = "Ramat Gan";
     /**
      * Parse and get the description of the weather from the json
      * @param weather json array containing the description of the weather
@@ -49,8 +47,7 @@ public class WeatherWidget extends Widget {
     /**
      * Show weather as parsed from data
      */
-    void showWeather(String url, String city) {
-        String data = requestWeatherData(url);
+    void showWeather(String data, String city) {
         JSONObject obj = new JSONObject(data);
         JSONArray weather = obj.getJSONArray("weather");
         JSONObject main = obj.getJSONObject("main");
@@ -64,33 +61,35 @@ public class WeatherWidget extends Widget {
                 + "°C and max temperature of " + info.get("temp_max") + "°C.\nHumidity: " + info.get("humidity") + "%\n");
     }
 
-    String requestWeatherData(String url) {
-        OkHttpClient client = new OkHttpClient();
+    String getUrl() {
+        return "http://api.openweathermap.org/data/2.5/weather?q="
+            + this.city +
+            "&appid=ba602af69e087755dc712a9ec9f29e71&units=metric";
+    }
 
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.body() == null) {
-                System.out.println("No body in response");
-                return null;
-            }
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    @Override
+    protected void sendRequest(String url) {
+        super.sendRequest(url);
     }
 
     @Override
     public void display() {
-
+        long displayThresholdInSeconds = 10;
+        long currentTime = System.currentTimeMillis() / 1000;
+        if ((currentTime - this.LastUpdate) > displayThresholdInSeconds) {
+            this.LastUpdate = currentTime;
+            System.out.println("Displaying Weather!");
+            this.sendRequest(this.getUrl());
+        }
     }
 
     @Override
     public void handleReply(String reply) {
+        this.showWeather(reply, this.city);
+    }
 
+    @Override
+    public String getType() {
+        return "WebDataPoller";
     }
 }

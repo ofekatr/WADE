@@ -9,16 +9,14 @@ import java.util.Map;
  */
 public class ClientHandler extends Thread {
     private final BufferedReader br;
-    private final PrintWriter pw;
     private final Socket s;
     private final Map<String, DataPoller> dp;
 
     /**
      * A class constructor.
      */
-    public ClientHandler(BufferedReader br, PrintWriter pw, Socket s, Map<String, DataPoller> dp) {
+    public ClientHandler(BufferedReader br, Socket s, Map<String, DataPoller> dp) {
         this.br = br;
-        this.pw = pw;
         this.s = s;
         this.dp = dp;
     }
@@ -35,8 +33,7 @@ public class ClientHandler extends Thread {
             if (poller == null)
                 return;
             String reply = poller.sendRequest(request);
-            this.pw.println(reply);
-            this.pw.close();
+            this.s.getOutputStream().write(reply.getBytes());
             this.br.close();
             this.s.close();
 

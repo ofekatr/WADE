@@ -8,9 +8,9 @@ public abstract class Widget {
         return this.type;
     }
 
-    public void sendRequest(String requestStr) {
-        this.connectionManager.sendRequest(new Message(this.type, requestStr), this);
+    protected void sendRequest(String requestStr) {
+        this.connectionManager.sendRequest(new Message(this.getType(), requestStr), this);
     }
 
-    public abstract void handleReply(String reply);
+    protected abstract void handleReply(String reply);
 }

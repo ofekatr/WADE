@@ -3,12 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WidgetFactory {
-    private static final Map<String, String> map;
-
-    static {
-        Map<String, String> hMap = new HashMap<>();
-        map = Collections.unmodifiableMap(hMap);
-    }
+    private static final Map<String, String> map = new HashMap<>();
 
     public static Widget createWidget(String name) {
         try {

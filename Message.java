@@ -37,7 +37,7 @@ public class Message {
      * @return String format of the message.
      */
     public String toString() {
-        return "<" + this.type + ">" + this.requestStr;
+        return "<" + this.type + ">" + this.requestStr + "\n";
     }
 
     /**
@@ -48,7 +48,7 @@ public class Message {
      */
     public static String typeFromMessageStr(String message) {
         int start_i = message.indexOf('<') + 1;
-        int len = message.indexOf('>') - start_i;
+        int len = message.indexOf('>') - start_i + 1;
         return message.substring(start_i, len);
     }
 
