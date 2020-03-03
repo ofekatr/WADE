@@ -1,3 +1,7 @@
+/**
+ * The Observable interface - for observer pattern implementation.
+ * Currently unused.
+ */
 public interface Observable {
     public void addObserver(Observer o);
 

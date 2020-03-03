@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Server side class - Provides services for client requests.
+ * Server side class - Satisfies client requests.
  */
 public class Server {
     private static final int DEFAULT_PORT = 8080;
@@ -17,18 +17,28 @@ public class Server {
     private boolean stop;
 
 
-    // Singleton implementation
+    /**
+     * A class constructor. Is private for Singleton Implementation.
+     *
+     * @param port
+     */
     private Server(int port) {
         this.port = port;
         this.dp = new HashMap<>();
     }
 
+    /**
+     * A class constructor. Is private for Singleton Implementation.
+     */
     private Server() {
         this.port = DEFAULT_PORT;
         this.dp = new HashMap<>();
 
     }
 
+    /**
+     * Open a socket for the server's operations.
+     */
     private void openServerSocket() {
         try {
             this.serverSocket = new ServerSocket(this.port);
@@ -37,22 +47,40 @@ public class Server {
         }
     }
 
+    /**
+     * Singleton Pattern implementation method.
+     *
+     * @return the server single instance.
+     */
     public static Server instance() {
         if (server == null)
             server = new Server();
         return server;
     }
 
-    public boolean addDataPoller(String name) {
+    /**
+     * Add a data poller to be used for the given message type (widget based).
+     *
+     * @param name the message type relevant to the poller - widget based.
+     */
+    public void addDataPoller(String name) {
         this.dp.put(name, DataPollerFactory.createDataPoller(name));
-        return true;
     }
 
+    /**
+     * A get method for the member stop.
+     *
+     * @return the value of stop.
+     */
     private boolean shouldStop() {
         return this.stop;
     }
 
+    /**
+     * Run the server and handle client requests in separate threads.
+     */
     public void runServer() {
+        this.openServerSocket();
         while (!this.shouldStop()) {
             try {
                 Socket clientSocket = this.serverSocket.accept();

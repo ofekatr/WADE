@@ -1,13 +1,24 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.Executor;
 
+
+/**
+ * A Task class - for communication. Executes requests delivery.
+ */
 public class MessageSendTask implements Runnable {
     private int port;
     private String host;
     private Message message;
     private Widget widget;
 
+    /**
+     * A class constructor.
+     *
+     * @param host
+     * @param port
+     * @param m
+     * @param w
+     */
     public MessageSendTask(String host, int port, Message m, Widget w) {
         this.port = port;
         this.host = host;
@@ -15,6 +26,9 @@ public class MessageSendTask implements Runnable {
         this.widget = w;
     }
 
+    /**
+     * Runnable interface method - Open a connection and send the given request.
+     */
     public void run() {
         try {
             Socket clientSocket = new Socket(host, port);
