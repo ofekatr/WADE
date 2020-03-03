@@ -18,6 +18,7 @@ public class Client {
         this.running = false;
         this.widgets = new WidgetCollection();
         this.connectionManager = ConnectionManager.instance();
+
     }
 
     /**

@@ -9,7 +9,7 @@ public abstract class Widget {
     }
 
     protected void sendRequest(String requestStr) {
-        this.connectionManager.sendRequest(new Message(this.getType(), requestStr), this);
+        this.connectionManager.requestReceived(new Message(this.getType(), requestStr), this);
     }
 
     protected abstract void handleReply(String reply);

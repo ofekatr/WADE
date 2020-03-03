@@ -1,27 +1,25 @@
-import java.util.concurrent.*;
-
 /**
  * Connection Manger Class - Handles communication between a client and a given server.
  */
 public class ConnectionManager {
     private final int DEF_PORT = 8080;
     private final String DEF_HOST = "localhost";
-
     private int port;
     private String host;
     private static ConnectionManager cm = null;
-    private ExecutorService executor;
+    private SendRequestCommand command;
 
     // Class Constructor - Private for Singleton Pattern implementation.
-    private ConnectionManager(int port, String host) {
-        this.executor = Executors.newSingleThreadExecutor();
+    private ConnectionManager(int port, String host, SendRequestCommand sendRequestCommand) {
         this.port = port;
         this.host = host;
+        sendRequestCommand.setPort(port);
+        sendRequestCommand.setHost(host);
+        this.command = sendRequestCommand;
     }
 
     // Class Constructor - Private for Singleton Pattern implementation.
     private ConnectionManager() {
-        this.executor = Executors.newSingleThreadExecutor();
         this.port = DEF_PORT;
         this.host = DEF_HOST;
     }
@@ -32,8 +30,13 @@ public class ConnectionManager {
      * @return the Connection Manger.
      */
     public static ConnectionManager instance() {
-        if (cm == null)
+        if (cm == null) {
             cm = new ConnectionManager();
+            SendRequestCommand sendRequestCommand = new ExecutorSendRequestCommand();
+            sendRequestCommand.setHost(cm.host);
+            sendRequestCommand.setPort(cm.port);
+            cm.setCommand(sendRequestCommand);
+        }
         return cm;
     }
 
@@ -43,8 +46,16 @@ public class ConnectionManager {
      * @param m Message with the client's request
      * @param w The widget sender of the request.
      */
-    public void sendRequest(Message m, Widget w) {
-        this.executor.execute(new MessageSendTask(this.host, this.port, m, w));
+    public void requestReceived(Message m, Widget w) {
+        this.command.setM(m);
+        this.command.setW(w);
+        this.command.sendRequest();
+    }
+
+    public void setCommand(SendRequestCommand command) {
+        command.setPort(port);
+        command.setHost(host);
+        this.command = command;
     }
 
     /**
@@ -54,6 +65,7 @@ public class ConnectionManager {
      */
     public void setPort(int port) {
         this.port = port;
+        this.command.setPort(port);
     }
 
     /**
@@ -63,6 +75,7 @@ public class ConnectionManager {
      */
     public void setHost(String host) {
         this.host = host;
+        this.command.setHost(host);
     }
 
     /**
