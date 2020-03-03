@@ -2,8 +2,6 @@ public abstract class Widget {
     protected String type;
     protected ConnectionManager connectionManager;
 
-    public abstract Widget instance();
-
     public abstract void display();
 
     public String getType() {

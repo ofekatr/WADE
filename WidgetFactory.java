@@ -3,24 +3,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WidgetFactory {
-    private static final Map<String, Widget> map;
+    private static final Map<String, String> map;
 
     static {
-        Map<String, Widget> hMap = new HashMap<>();
+        Map<String, String> hMap = new HashMap<>();
         map = Collections.unmodifiableMap(hMap);
     }
 
-    public static Widget createWidget(String type) {
-        return map.get(type).instance();
+    public static Widget createWidget(String name) {
+        try {
+            String type = map.get(name);
+            return (Widget) Class.forName(type).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Error: the requested widget does not exist.", e);
+        }
+
     }
 
-    public static boolean addWidget(String type, String key) {
-        try {
-            map.put(key, (Widget) Class.forName(type).newInstance());
-            return true;
-        } catch (Exception e) {
-            System.out.println("Failed Adding Class To Map.");
-            return false;
-        }
+    public static void addWidget(String type, String key) {
+        map.put(key, type);
     }
 }

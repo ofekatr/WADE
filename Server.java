@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Server side class - Provides services for client requests.
+ */
 public class Server {
     private static final int DEFAULT_PORT = 8080;
     private final int port;

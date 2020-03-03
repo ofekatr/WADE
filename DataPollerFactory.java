@@ -1,26 +1,26 @@
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 public class DataPollerFactory {
-    private static final Map<String, DataPoller> map;
+    private static final Map<String, String> map;
 
     static {
-        Map<String, DataPoller> hMap = new HashMap<>();
+        Map<String, String> hMap = new HashMap<>();
         map = Collections.unmodifiableMap(hMap);
     }
 
-    public static DataPoller createDataPoller(String type) {
-        return map.get(type).instance();
+    public static DataPoller createDataPoller(String name) {
+        try {
+            String type = map.get(name);
+            return (DataPoller) Class.forName(type).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Error: DataPoller does not exist.", e);
+        }
     }
 
-    public static boolean addDataPoller(String type, String key) {
-        try {
-            map.put(key, (DataPoller) Class.forName(type).newInstance());
-            return true;
-        } catch (Exception e) {
-            System.out.println("Failed Adding Class To Map.");
-            return false;
-        }
+    public static void addDataPoller(String type, String key) {
+        map.put(key, type);
     }
 }

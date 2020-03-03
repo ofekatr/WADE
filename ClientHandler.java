@@ -4,12 +4,18 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Map;
 
+/**
+ * The Client Handler - Handles a single client request in a new thread.
+ */
 public class ClientHandler extends Thread {
     private final BufferedReader br;
     private final PrintWriter pw;
     private final Socket s;
     private final Map<String, DataPoller> dp;
 
+    /**
+     * A class constructor.
+     */
     public ClientHandler(BufferedReader br, PrintWriter pw, Socket s, Map<String, DataPoller> dp) {
         this.br = br;
         this.pw = pw;
@@ -17,6 +23,9 @@ public class ClientHandler extends Thread {
         this.dp = dp;
     }
 
+    /**
+     * Thread class method - handle the client's request.
+     */
     public void run() {
         try {
             String messageStr = this.br.readLine();
