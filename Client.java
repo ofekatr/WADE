@@ -10,8 +10,6 @@ public class Client {
     private WidgetCollection widgets;
     private ConnectionManager connectionManager;
     private boolean running;
-    // TODO: Add a member for display management.
-
 
     /**
      * Class Constructor.

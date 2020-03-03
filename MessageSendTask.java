@@ -13,11 +13,6 @@ public class MessageSendTask implements Runnable {
 
     /**
      * A class constructor.
-     *
-     * @param host
-     * @param port
-     * @param m
-     * @param w
      */
     public MessageSendTask(String host, int port, Message m, Widget w) {
         this.port = port;

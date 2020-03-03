@@ -7,9 +7,6 @@ public class Message {
 
     /**
      * A class constructor
-     *
-     * @param type       type value. (Acts as a header)
-     * @param requestStr request string value.
      */
     public Message(String type, String requestStr) {
         this.type = type;

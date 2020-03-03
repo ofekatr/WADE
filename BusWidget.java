@@ -60,6 +60,7 @@ public class BusWidget extends Widget {
             throw new RuntimeException(e);
         }
     }
+
     void showBusData(String url) {
         String data = requestBusData(url);
         JSONArray busLines = new JSONArray(data);
