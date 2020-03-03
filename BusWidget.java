@@ -10,14 +10,15 @@ import java.security.cert.CertificateException;
 
 public class BusWidget extends Widget {
     @Override
-    Widget instance() {
-        return null;
+    public void display() {
+
     }
 
     @Override
-    void display() {
+    public void handleReply(String reply) {
 
     }
+
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
