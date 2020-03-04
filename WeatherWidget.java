@@ -5,6 +5,7 @@ import org.json.JSONObject;
 public class WeatherWidget extends Widget {
     private long LastUpdate = 0;
     String city = "Ramat Gan";
+
     /**
      * Parse and get the description of the weather from the json
      * @param weather json array containing the description of the weather
@@ -61,17 +62,28 @@ public class WeatherWidget extends Widget {
                 + "°C and max temperature of " + info.get("temp_max") + "°C.\nHumidity: " + info.get("humidity") + "%\n");
     }
 
+    /**
+     * Get the web URL used to poll data for this widget
+     * @return the url used.
+     */
     String getUrl() {
         return "http://api.openweathermap.org/data/2.5/weather?q="
             + this.city +
             "&appid=ba602af69e087755dc712a9ec9f29e71&units=metric";
     }
 
+    /**
+     * Send request of data given the url.
+     * @param url url used to retrieve data.
+     */
     @Override
     protected void sendRequest(String url) {
         super.sendRequest(url);
     }
 
+    /**
+     * Display widget.
+     */
     @Override
     public void display() {
         long displayThresholdInSeconds = 10;
@@ -83,11 +95,19 @@ public class WeatherWidget extends Widget {
         }
     }
 
+    /**
+     * Given the data (json) replied from server, show it on screen.
+     * @param reply json retrieved from server
+     */
     @Override
     public void handleReply(String reply) {
         this.showWeather(reply, this.city);
     }
 
+    /**
+     * Get type name of the widget.
+     * @return type name.
+     */
     @Override
     public String getType() {
         return "WebDataPoller";

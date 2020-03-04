@@ -10,6 +10,10 @@ import java.security.cert.CertificateException;
 
 public class WebDataPoller extends DataPoller {
 
+    /**
+     * Used when a trusting http client is needed (one that doesn't await certificate from server).
+     * @return trusting OkHttpClient.
+     */
     private static OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Create a trust manager that does not validate certificate chains
@@ -52,6 +56,11 @@ public class WebDataPoller extends DataPoller {
         }
     }
 
+    /**
+     * Send request of data retrieval to server.
+     * @param url the url used to retrieve data.
+     * @return the reply from the server.
+     */
     @Override
     public String sendRequest(String url) {
         OkHttpClient client = getUnsafeOkHttpClient();

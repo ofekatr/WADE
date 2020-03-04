@@ -8,7 +8,12 @@ public class RequestsManager {
     private String host;
     private SendRequestCommand command;
 
-    // A class constructor.
+    /**
+     * Class constructor
+     * @param port port number
+     * @param host host ip
+     * @param sendRequestCommand used to send requests and handle connection
+     */
     public RequestsManager(int port, String host, SendRequestCommand sendRequestCommand) {
         this.port = port;
         this.host = host;
@@ -17,6 +22,9 @@ public class RequestsManager {
         this.command = sendRequestCommand;
     }
 
+    /**
+     * Class constructor
+     */
     public RequestsManager() {
         this.port = DEF_PORT;
         this.host = DEF_HOST;
