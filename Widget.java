@@ -1,6 +1,6 @@
 public abstract class Widget {
     protected String type;
-    protected ConnectionManager connectionManager;
+    protected RequestsManager requestsManager;
 
     public abstract void display();
 
@@ -9,7 +9,7 @@ public abstract class Widget {
     }
 
     protected void sendRequest(String requestStr) {
-        this.connectionManager.requestReceived(new Message(this.getType(), requestStr), this);
+        this.requestsManager.requestReceived(new Message(this.getType(), requestStr), this);
     }
 
     protected abstract void handleReply(String reply);

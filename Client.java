@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class Client {
 
     private WidgetCollection widgets;
-    private ConnectionManager connectionManager;
+    private RequestsManager requestsManager;
     private boolean running;
 
     /**
@@ -17,8 +17,7 @@ public class Client {
     public Client() {
         this.running = false;
         this.widgets = new WidgetCollection();
-        this.connectionManager = ConnectionManager.instance();
-
+        this.requestsManager = new RequestsManager();
     }
 
     /**
@@ -56,7 +55,7 @@ public class Client {
         Iterator it = this.widgets.iterator();
         while (it.hasNext()) {
             Widget widget = (Widget) it.next();
-            widget.connectionManager = this.connectionManager;
+            widget.requestsManager = this.requestsManager;
             this.runWidget(widget);
         }
     }

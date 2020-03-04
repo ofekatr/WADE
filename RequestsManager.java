@@ -1,16 +1,15 @@
 /**
- * Connection Manger Class - Handles communication between a client and a given server.
+ * Request Manger Class - Handles communication between a client and a given server.
  */
-public class ConnectionManager {
+public class RequestsManager {
     private final int DEF_PORT = 8080;
     private final String DEF_HOST = "localhost";
     private int port;
     private String host;
-    private static ConnectionManager cm = null;
     private SendRequestCommand command;
 
-    // Class Constructor - Private for Singleton Pattern implementation.
-    private ConnectionManager(int port, String host, SendRequestCommand sendRequestCommand) {
+    // A class constructor.
+    public RequestsManager(int port, String host, SendRequestCommand sendRequestCommand) {
         this.port = port;
         this.host = host;
         sendRequestCommand.setPort(port);
@@ -18,27 +17,30 @@ public class ConnectionManager {
         this.command = sendRequestCommand;
     }
 
-    // Class Constructor - Private for Singleton Pattern implementation.
-    private ConnectionManager() {
+    public RequestsManager() {
         this.port = DEF_PORT;
         this.host = DEF_HOST;
+        SendRequestCommand sendRequestCommand = new ExecutorSendRequestCommand();
+        sendRequestCommand.setHost(this.host);
+        sendRequestCommand.setPort(this.port);
+        this.setCommand(sendRequestCommand);
     }
 
     /**
      * Singleton Pattern implementation method.
      *
-     * @return the Connection Manger.
+     * @return the Requests Manger.
      */
-    public static ConnectionManager instance() {
-        if (cm == null) {
-            cm = new ConnectionManager();
-            SendRequestCommand sendRequestCommand = new ExecutorSendRequestCommand();
-            sendRequestCommand.setHost(cm.host);
-            sendRequestCommand.setPort(cm.port);
-            cm.setCommand(sendRequestCommand);
-        }
-        return cm;
-    }
+//    public static RequestsManager instance() {
+//        if (rm == null) {
+//            rm = new RequestsManager();
+//            SendRequestCommand sendRequestCommand = new ExecutorSendRequestCommand();
+//            sendRequestCommand.setHost(rm.host);
+//            sendRequestCommand.setPort(rm.port);
+//            rm.setCommand(sendRequestCommand);
+//        }
+//        return rm;
+//    }
 
     /**
      * Send a given client request to the Server.
@@ -53,8 +55,8 @@ public class ConnectionManager {
     }
 
     public void setCommand(SendRequestCommand command) {
-        command.setPort(port);
-        command.setHost(host);
+        command.setPort(this.port);
+        command.setHost(this.host);
         this.command = command;
     }
 
