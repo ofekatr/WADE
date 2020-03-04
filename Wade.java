@@ -1,4 +1,8 @@
 public class Wade {
+
+    /**
+     * Start Server.
+     */
     public static void DoServer() {
         System.out.println("Starting Server!");
 
@@ -8,6 +12,9 @@ public class Wade {
         s.runServer();
     }
 
+    /**
+     * Start Client.
+     */
     public static void DoClient() {
         System.out.println("Starting Client!");
 
@@ -19,6 +26,10 @@ public class Wade {
         c.run();
     }
 
+    /**
+     * Main function.
+     * @param args arguments for main.
+     */
     public static void main(String[] args) {
         if (args[0].contentEquals("--server")) {
             DoServer();
