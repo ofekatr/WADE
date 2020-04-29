@@ -7,7 +7,7 @@ The project’s architecture is based on the Client-Server pattern. Client side 
 
 Once running, the client side parses a configuration file. The file details the requested widgets that the user wishes to display. The number of widgets that can be displayed at once is limited.
 
-Currently user interface is terminal-based.
+Currently user interface is terminal-based. Data updates are displayed evey short interval of time.
 
 Running instructions: 
 
