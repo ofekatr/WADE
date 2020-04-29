@@ -7,4 +7,9 @@ The project’s architecture is based on the Client-Server pattern. Client side 
 
 Once running, the client side parses a configuration file. The file details the requested widgets that the user wishes to display. The number of widgets that can be displayed at once is limited.
 
+Running instructions: 
+
+– Requires adding the following libraries: JSON, OkHttp3.
+– Program receives 1 of 2 possibe arguments: --server, --client .
+
 ![Runtime Example](https://user-images.githubusercontent.com/46415136/80614248-e4d92000-8a46-11ea-9cc4-b56eb297e86c.jpeg)
