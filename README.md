@@ -1,5 +1,5 @@
 # WADE
-Widget Applications Display Engine.
+**Widget Applications Display Engine.**
 
 A basic widget manager application. Users can configure multiple widgets to display on their screens. Initially developed for Raspberry Pi. Ultimately can be expanded and designed to run on any display. Widgets provide and receive different formats of live data – provided via TCP/IP communication.
 
@@ -11,7 +11,7 @@ Once running, the client side parses a configuration file. The file details the 
 
 Currently user interface is terminal-based. Data updates are displayed evey short interval of time.
 
-Running instructions: 
+**Running instructions: **
 
 – Requires adding the following libraries: JSON, OkHttp3.
 
