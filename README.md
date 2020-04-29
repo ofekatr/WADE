@@ -11,7 +11,7 @@ Once running, the client side parses a configuration file. The file details the 
 
 Currently user interface is terminal-based. Data updates are displayed evey short interval of time.
 
-**Running instructions: **
+**Running instructions:**
 
 – Requires adding the following libraries: JSON, OkHttp3.
 
