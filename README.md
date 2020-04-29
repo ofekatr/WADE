@@ -12,6 +12,7 @@ Currently user interface is terminal-based.
 Running instructions: 
 
 – Requires adding the following libraries: JSON, OkHttp3.
+
 – Program receives 1 of 2 possibe arguments: --server, --client .
 
 ![Runtime Example](https://user-images.githubusercontent.com/46415136/80614248-e4d92000-8a46-11ea-9cc4-b56eb297e86c.jpeg)
