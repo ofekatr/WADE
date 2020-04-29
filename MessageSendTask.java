@@ -33,7 +33,11 @@ public class MessageSendTask implements Runnable {
             String reply = reader.readLine();
             reader.close();
             clientSocket.close();
-            widget.handleReply(reply);
+            try {
+                widget.handleReply(reply);
+            } catch (Exception e) {
+                System.out.println("An error has occured in reply handling.");
+            }
 
             clientSocket.close();
         } catch (IOException e) {

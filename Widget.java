@@ -1,3 +1,5 @@
+import org.json.JSONException;
+
 public abstract class Widget {
     protected String type;
     protected RequestsManager requestsManager;
@@ -24,5 +26,5 @@ public abstract class Widget {
      * Handles the reply from server
      * @param reply data from server
      */
-    protected abstract void handleReply(String reply);
+    protected abstract void handleReply(String reply) throws Exception;
 }

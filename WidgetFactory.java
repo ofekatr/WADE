@@ -1,6 +1,4 @@
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WidgetFactory {
     private static final Map<String, String> map = new HashMap<>();
@@ -26,5 +24,9 @@ public class WidgetFactory {
      */
     public static void addWidget(String type, String key) {
         map.put(key, type);
+    }
+
+    public static Set<String> getNames(){
+        return map.keySet();
     }
 }
