@@ -5,7 +5,7 @@ A basic widget manager application. Users can configure multiple widgets to disp
 
 The project’s architecture is based on the Client.Client-Server.Server pattern. Client.Client side – focuses on presentation of widgets and their relevant data, while server side is responsible for producing the said data. That way, alternating data polling implementations becomes cleaner and is managed only on server side.
 
-**Please view the projects slides summary found among its files.**
+**Please view the project's slides summary found among its files.**
 
 Once running, the client side parses a configuration file. The file details the requested widgets that the user wishes to display. The number of widgets that can be displayed at once is limited.
 
