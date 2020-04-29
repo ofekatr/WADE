@@ -1,11 +1,20 @@
-import java.io.*;
+package Server;
+
+import DataPollers.DataPoller;
+import DataPollers.DataPollerFactory;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * Server side class - Satisfies client requests.
+ * Server.Server side class - Satisfies client requests.
  */
 public class Server {
     private static final int DEFAULT_PORT = 8080;
@@ -91,7 +100,7 @@ public class Server {
 
             } catch (IOException e) {
                 if (shouldStop()) {
-                    System.out.println("Server Stopped.");
+                    System.out.println("Server.Server Stopped.");
                     return;
                 }
                 throw new RuntimeException(

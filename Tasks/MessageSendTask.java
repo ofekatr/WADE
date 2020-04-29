@@ -1,4 +1,12 @@
-import java.io.*;
+package Tasks;
+
+import Client.Message;
+import Widgets.Widget;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 
@@ -33,7 +41,11 @@ public class MessageSendTask implements Runnable {
             String reply = reader.readLine();
             reader.close();
             clientSocket.close();
-            widget.handleReply(reply);
+            try {
+                widget.handleReply(reply);
+            } catch (Exception e) {
+                System.out.println("An error has occured in reply handling.");
+            }
 
             clientSocket.close();
         } catch (IOException e) {

@@ -1,6 +1,10 @@
-import java.util.HashMap;
+package Widgets;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class WeatherWidget extends Widget {
     private long LastUpdate = 0;
@@ -8,10 +12,11 @@ public class WeatherWidget extends Widget {
 
     /**
      * Parse and get the description of the weather from the json
+     *
      * @param weather json array containing the description of the weather
      * @return the weather parsed
      */
-    HashMap<String, String> getWeatherDescription(JSONArray weather) {
+    HashMap<String, String> getWeatherDescription(JSONArray weather) throws JSONException {
         HashMap<String, String> description = new HashMap<>();
 
         // Parse from JSON
@@ -25,10 +30,11 @@ public class WeatherWidget extends Widget {
 
     /**
      * Parse and get the info of the weather from the json
+     *
      * @param main json object containing the info of the weather
      * @return the weather parsed
      */
-    HashMap<String, Integer> getWeatherInfo(JSONObject main) {
+    HashMap<String, Integer> getWeatherInfo(JSONObject main) throws JSONException {
         HashMap<String, Integer> info = new HashMap<String, Integer>();
 
         // Parse from JSON
@@ -48,7 +54,7 @@ public class WeatherWidget extends Widget {
     /**
      * Show weather as parsed from data
      */
-    void showWeather(String data, String city) {
+    void showWeather(String data, String city) throws JSONException {
         JSONObject obj = new JSONObject(data);
         JSONArray weather = obj.getJSONArray("weather");
         JSONObject main = obj.getJSONObject("main");
@@ -64,16 +70,18 @@ public class WeatherWidget extends Widget {
 
     /**
      * Get the web URL used to poll data for this widget
+     *
      * @return the url used.
      */
     String getUrl() {
         return "http://api.openweathermap.org/data/2.5/weather?q="
-            + this.city +
-            "&appid=ba602af69e087755dc712a9ec9f29e71&units=metric";
+                + this.city +
+                "&appid=ba602af69e087755dc712a9ec9f29e71&units=metric";
     }
 
     /**
      * Send request of data given the url.
+     *
      * @param url url used to retrieve data.
      */
     @Override
@@ -97,19 +105,21 @@ public class WeatherWidget extends Widget {
 
     /**
      * Given the data (json) replied from server, show it on screen.
+     *
      * @param reply json retrieved from server
      */
     @Override
-    public void handleReply(String reply) {
+    public void handleReply(String reply) throws JSONException {
         this.showWeather(reply, this.city);
     }
 
     /**
      * Get type name of the widget.
+     *
      * @return type name.
      */
     @Override
     public String getType() {
-        return "WebDataPoller";
+        return "DataPollers.WebDataPoller";
     }
 }

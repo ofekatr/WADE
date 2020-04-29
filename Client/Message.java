@@ -1,5 +1,7 @@
+package Client;
+
 /**
- * The Message class - Wraps requests and replies.
+ * The Client.Message class - Wraps requests and replies.
  */
 public class Message {
     private String type;

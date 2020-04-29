@@ -1,6 +1,8 @@
+package Commands;
+
 public interface Command {
     /**
-     * Execute a Command.
+     * Execute a Commands.Command.
      */
     void execute();
 }

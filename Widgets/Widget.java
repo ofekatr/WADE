@@ -1,3 +1,8 @@
+package Widgets;
+
+import Client.Message;
+import Client.RequestsManager;
+
 public abstract class Widget {
     protected String type;
     protected RequestsManager requestsManager;
@@ -13,7 +18,7 @@ public abstract class Widget {
     }
 
     /**
-     * Send request of data retrieval via requestManager using Message.
+     * Send request of data retrieval via requestManager using Client.Message.
      * @param requestStr the request
      */
     protected void sendRequest(String requestStr) {
@@ -24,5 +29,13 @@ public abstract class Widget {
      * Handles the reply from server
      * @param reply data from server
      */
-    protected abstract void handleReply(String reply);
+    public abstract void handleReply(String reply) throws Exception;
+
+    public RequestsManager getRequestsManager() {
+        return requestsManager;
+    }
+
+    public void setRequestsManager(RequestsManager requestsManager) {
+        this.requestsManager = requestsManager;
+    }
 }

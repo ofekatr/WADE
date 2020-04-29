@@ -1,8 +1,14 @@
+package Client;
+
+import Widgets.Widget;
+import Widgets.WidgetCollection;
+import Widgets.WidgetFactory;
+
 import java.util.Iterator;
 
 /**
- * Client side class - The Widget manager.
- * Handles all Widget operations.
+ * Client.Client side class - The Widgets.Widget manager.
+ * Handles all Widgets.Widget operations.
  */
 
 public class Client {
@@ -35,7 +41,7 @@ public class Client {
     }
 
     /**
-     * Run and display a given Widget in a new thread.
+     * Run and display a given Widgets.Widget in a new thread.
      *
      * @param widget the given widget to run and display.
      */
@@ -55,7 +61,7 @@ public class Client {
         Iterator it = this.widgets.iterator();
         while (it.hasNext()) {
             Widget widget = (Widget) it.next();
-            widget.requestsManager = this.requestsManager;
+            widget.setRequestsManager(this.requestsManager);
             this.runWidget(widget);
         }
     }

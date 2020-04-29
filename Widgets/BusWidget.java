@@ -1,4 +1,7 @@
+package Widgets;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BusWidget extends Widget {
@@ -32,7 +35,7 @@ public class BusWidget extends Widget {
      */
     @Override
     public String getType() {
-        return "WebDataPoller";
+        return "DataPollers.WebDataPoller";
     }
 
     /**
@@ -40,7 +43,7 @@ public class BusWidget extends Widget {
      * @param reply json retrieved from server
      */
     @Override
-    protected void handleReply(String reply) {
+    public void handleReply(String reply) throws JSONException{
         this.showBusData(reply);
     }
 
@@ -57,20 +60,20 @@ public class BusWidget extends Widget {
      * Show all bus data as stated on data retrieved from server.
      * @param data json-type data containing all information needed.
      */
-    void showBusData(String data) {
-        JSONArray busLines = new JSONArray(data);
+    void showBusData(String data) throws JSONException {
 
-        for (int i = 0; i < busLines.length(); i++) {
-            JSONObject line = busLines.getJSONObject(i);
-            int lineNumber = line.getInt("Shilut");
-            int minutes = line.getInt("MinutesToArrival");
-            if (minutes == 0) {
-                System.out.println("Bus line number " + Integer.toString(lineNumber) + " arrived to the station.\n");
-            } else {
-                System.out.println("Bus line number " + Integer.toString(lineNumber) + " will arrive in the station in "
-                        + Integer.toString(minutes) + " minutes.\n");
+            JSONArray busLines = new JSONArray(data);
+            for (int i = 0; i < busLines.length(); i++) {
+                JSONObject line = busLines.getJSONObject(i);
+                int lineNumber = line.getInt("Shilut");
+                int minutes = line.getInt("MinutesToArrival");
+                if (minutes == 0) {
+                    System.out.println("Bus line number " + Integer.toString(lineNumber) + " arrived to the station.\n");
+                } else {
+                    System.out.println("Bus line number " + Integer.toString(lineNumber) + " will arrive in the station in "
+                            + Integer.toString(minutes) + " minutes.\n");
+                }
             }
-        }
     }
 
 }

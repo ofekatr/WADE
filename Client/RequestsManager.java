@@ -1,3 +1,8 @@
+package Client;
+
+import Commands.SendRequestCommand;
+import Widgets.Widget;
+
 /**
  * Request Manger Class - Handles communication between a client and a given server.
  */
@@ -39,10 +44,10 @@ public class RequestsManager {
      *
      * @return the Requests Manger.
      */
-//    public static RequestsManager instance() {
+//    public static Client.RequestsManager instance() {
 //        if (rm == null) {
-//            rm = new RequestsManager();
-//            SendRequestCommand sendRequestCommand = new ExecutorSendRequestCommand();
+//            rm = new Client.RequestsManager();
+//            Commands.SendRequestCommand sendRequestCommand = new Widgets.Client.ExecutorSendRequestCommand();
 //            sendRequestCommand.setHost(rm.host);
 //            sendRequestCommand.setPort(rm.port);
 //            rm.setCommand(sendRequestCommand);
@@ -51,9 +56,9 @@ public class RequestsManager {
 //    }
 
     /**
-     * Send a given client request to the Server.
+     * Send a given client request to the Server.Server.
      *
-     * @param m Message with the client's request
+     * @param m Client.Message with the client's request
      * @param w The widget sender of the request.
      */
     public void requestReceived(Message m, Widget w) {

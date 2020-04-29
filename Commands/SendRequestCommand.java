@@ -1,3 +1,8 @@
+package Commands;
+
+import Client.Message;
+import Widgets.Widget;
+
 public abstract class SendRequestCommand implements Command {
     protected Message m;
     protected Widget w;
@@ -10,7 +15,7 @@ public abstract class SendRequestCommand implements Command {
     public abstract void sendRequest();
 
     /**
-     * Execute Command.
+     * Execute Commands.Command.
      */
     public void execute() {
         this.sendRequest();
@@ -25,8 +30,8 @@ public abstract class SendRequestCommand implements Command {
     }
 
     /**
-     * Set Widget.
-     * @param w the Widget.
+     * Set Widgets.Widget.
+     * @param w the Widgets.Widget.
      */
     public void setW(Widget w) {
         this.w = w;

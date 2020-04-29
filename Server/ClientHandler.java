@@ -1,11 +1,15 @@
+package Server;
+
+import Client.Message;
+import DataPollers.DataPoller;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Map;
 
 /**
- * The Client Handler - Handles a single client request in a new thread.
+ * The Client.Client Handler - Handles a single client request in a new thread.
  */
 public class ClientHandler extends Thread {
     private final BufferedReader br;

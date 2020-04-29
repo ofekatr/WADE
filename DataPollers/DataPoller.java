@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+package DataPollers;
 
 /**
- * The DataPoller abstract class - Determines polling methods, resources and strategies, e.g.: usage of databases,
+ * The DataPollers.DataPoller abstract class - Determines polling methods, resources and strategies, e.g.: usage of databases,
  * proxies, external services, etc.
  */
 public abstract class DataPoller {

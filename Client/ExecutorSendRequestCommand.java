@@ -1,3 +1,8 @@
+package Client;
+
+import Commands.SendRequestCommand;
+import Tasks.MessageSendTask;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
